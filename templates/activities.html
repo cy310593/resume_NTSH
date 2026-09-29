@@ -1,3 +1,4 @@
+<!DOCTYPE html> <html lang="zh-TW"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>課外活動｜我的學習歷程</title>
 
 <style>
@@ -18,7 +19,7 @@
         background: linear-gradient(135deg, #2563eb, #4f46e5);
         color: white;
         text-align: center;
-        padding: 60px 20px;
+        padding: 55px 20px;
     }
 
     header h1 {
@@ -28,13 +29,12 @@
 
     header p {
         font-size: 18px;
-        opacity: 0.9;
     }
 
     .back-btn {
         display: inline-block;
-        margin-top: 25px;
-        padding: 10px 22px;
+        margin-top: 20px;
+        padding: 9px 22px;
         background: white;
         color: #2563eb;
         text-decoration: none;
@@ -43,12 +43,12 @@
     }
 
     .back-btn:hover {
-        background: #e0e7ff;
+        background: #dbeafe;
         transform: translateY(-2px);
     }
 
     .container {
-        max-width: 1100px;
+        max-width: 1200px;
         margin: 50px auto;
         padding: 0 20px;
     }
@@ -59,8 +59,8 @@
     }
 
     .intro h2 {
-        font-size: 30px;
         color: #1e3a8a;
+        font-size: 30px;
         margin-bottom: 10px;
     }
 
@@ -68,10 +68,11 @@
         color: #666;
     }
 
+    /* 六格排列 */
     .activities {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
     }
 
     .activity-card {
@@ -83,46 +84,47 @@
     }
 
     .activity-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        transform: translateY(-7px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.13);
     }
 
     .activity-card img {
         width: 100%;
-        height: 230px;
+        height: 200px;
         object-fit: cover;
         display: block;
     }
 
     .activity-content {
-        padding: 25px;
+        padding: 22px;
     }
 
     .activity-content h3 {
         color: #2563eb;
-        font-size: 23px;
-        margin-bottom: 8px;
+        font-size: 21px;
+        margin-bottom: 6px;
     }
 
     .date {
-        color: #777;
+        color: #888;
         font-size: 14px;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
     }
 
     .activity-content p {
         color: #555;
-        margin-bottom: 12px;
+        font-size: 15px;
+        margin-bottom: 10px;
     }
 
     .tag {
         display: inline-block;
         background: #dbeafe;
         color: #1d4ed8;
-        padding: 4px 12px;
+        padding: 3px 10px;
         border-radius: 20px;
-        font-size: 13px;
-        margin-top: 5px;
+        font-size: 12px;
+        margin: 3px 2px;
     }
 
     .summary {
@@ -135,7 +137,7 @@
 
     .summary h2 {
         color: #1e3a8a;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
     }
 
     footer {
@@ -146,7 +148,15 @@
         color: white;
     }
 
-    @media (max-width: 768px) {
+    /* 平板 */
+    @media (max-width: 900px) {
+        .activities {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    /* 手機 */
+    @media (max-width: 600px) {
         header h1 {
             font-size: 32px;
         }
@@ -154,10 +164,137 @@
         .activities {
             grid-template-columns: 1fr;
         }
-
-        .activity-card img {
-            height: 200px;
-        }
     }
 </style>
 
+</head> <body> <header> <h1>課外活動</h1> <p>探索興趣、累積經驗，讓高中生活更加精彩</p> <a href="/" class="back-btn">← 回首頁</a> </header> <main class="container">
+<section class="intro">
+    <h2>我的課外活動</h2>
+    <p>
+        在課堂之外，我積極參與不同活動，
+        從學習、競賽到團隊合作，每一次經驗都讓我有所成長。
+    </p>
+</section>
+
+<section class="activities">
+
+    <!-- 第一格 -->
+    <article class="activity-card">
+        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=900&q=80"
+             alt="自主學習">
+
+        <div class="activity-content">
+            <h3>📚 自主學習</h3>
+            <div class="date">高中三年</div>
+            <p>
+                利用課餘時間探索有興趣的主題，
+                培養獨立學習與規劃時間的能力。
+            </p>
+            <span class="tag">自主學習</span>
+            <span class="tag">時間管理</span>
+        </div>
+    </article>
+
+
+    <!-- 第二格 -->
+    <article class="activity-card">
+        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=80"
+             alt="程式設計">
+
+        <div class="activity-content">
+            <h3>💻 程式設計</h3>
+            <div class="date">高中期間</div>
+            <p>
+                接觸 HTML、CSS 與 JavaScript，
+                嘗試將自己的想法製作成實際的網頁作品。
+            </p>
+            <span class="tag">程式設計</span>
+            <span class="tag">網頁設計</span>
+        </div>
+    </article>
+
+
+    <!-- 第三格 -->
+    <article class="activity-card">
+        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=900&q=80"
+             alt="團隊合作">
+
+        <div class="activity-content">
+            <h3>🤝 團隊合作</h3>
+            <div class="date">高中期間</div>
+            <p>
+                與同學一起完成活動與專題，
+                學習分工、溝通與共同解決問題。
+            </p>
+            <span class="tag">團隊合作</span>
+            <span class="tag">溝通</span>
+        </div>
+    </article>
+
+
+    <!-- 第四格 -->
+    <article class="activity-card">
+        <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=900&q=80"
+             alt="志工服務">
+
+        <div class="activity-content">
+            <h3>❤️ 志工服務</h3>
+            <div class="date">高中期間</div>
+            <p>
+                參與學校與社區服務活動，
+                從服務他人的過程中培養責任感。
+            </p>
+            <span class="tag">志工</span>
+            <span class="tag">責任感</span>
+        </div>
+    </article>
+
+
+    <!-- 第五格 -->
+    <article class="activity-card">
+        <img src="https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&w=900&q=80"
+             alt="運動活動">
+
+        <div class="activity-content">
+            <h3>🏃 運動活動</h3>
+            <div class="date">高中期間</div>
+            <p>
+                透過運動維持健康，也學習堅持、
+                合作與面對挑戰的態度。
+            </p>
+            <span class="tag">運動</span>
+            <span class="tag">毅力</span>
+        </div>
+    </article>
+
+
+    <!-- 第六格 -->
+    <article class="activity-card">
+        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80"
+             alt="校外活動">
+
+        <div class="activity-content">
+            <h3>🎓 校外活動</h3>
+            <div class="date">高中期間</div>
+            <p>
+                參與校外參訪、營隊與學習活動，
+                接觸不同領域並拓展自己的視野。
+            </p>
+            <span class="tag">探索</span>
+            <span class="tag">學習</span>
+        </div>
+    </article>
+
+</section>
+
+
+<section class="summary">
+    <h2>🌱 我的收穫</h2>
+    <p>
+        課外活動讓我在課業之外獲得更多實際經驗，
+        也培養了溝通、合作、時間管理與解決問題的能力。
+        這些經驗將成為我進入大學後持續學習的重要基礎。
+    </p>
+</section>
+
+</main> <footer> <p>© 2026 我的個人網站｜高中生學習歷程</p> </footer> </body> </html>
