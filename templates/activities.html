@@ -1,47 +1,162 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ask a Question</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+<title>課外活動｜我的學習歷程</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: "Noto Sans TC", Arial, sans-serif;
+        background: #f5f7fa;
+        color: #333;
+        line-height: 1.8;
+    }
+
+    header {
+        background: linear-gradient(135deg, #2563eb, #4f46e5);
+        color: white;
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    header h1 {
+        font-size: 42px;
+        margin-bottom: 10px;
+    }
+
+    header p {
+        font-size: 18px;
+        opacity: 0.9;
+    }
+
+    .back-btn {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 10px 22px;
+        background: white;
+        color: #2563eb;
+        text-decoration: none;
+        border-radius: 25px;
+        transition: 0.3s;
+    }
+
+    .back-btn:hover {
+        background: #e0e7ff;
+        transform: translateY(-2px);
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 50px auto;
+        padding: 0 20px;
+    }
+
+    .intro {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .intro h2 {
+        font-size: 30px;
+        color: #1e3a8a;
+        margin-bottom: 10px;
+    }
+
+    .intro p {
+        color: #666;
+    }
+
+    .activities {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .activity-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+        transition: 0.3s;
+    }
+
+    .activity-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .activity-card img {
+        width: 100%;
+        height: 230px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .activity-content {
+        padding: 25px;
+    }
+
+    .activity-content h3 {
+        color: #2563eb;
+        font-size: 23px;
+        margin-bottom: 8px;
+    }
+
+    .date {
+        color: #777;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .activity-content p {
+        color: #555;
+        margin-bottom: 12px;
+    }
+
+    .tag {
+        display: inline-block;
+        background: #dbeafe;
+        color: #1d4ed8;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        margin-top: 5px;
+    }
+
+    .summary {
+        background: linear-gradient(135deg, #eff6ff, #eef2ff);
+        margin-top: 50px;
+        padding: 35px;
+        border-radius: 16px;
+        text-align: center;
+    }
+
+    .summary h2 {
+        color: #1e3a8a;
+        margin-bottom: 15px;
+    }
+
+    footer {
+        margin-top: 60px;
+        padding: 25px;
+        text-align: center;
+        background: #1e293b;
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        header h1 {
+            font-size: 32px;
         }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            text-align: center;
+
+        .activities {
+            grid-template-columns: 1fr;
         }
-        section {
-            margin: 20px;
+
+        .activity-card img {
+            height: 200px;
         }
-        .form-box {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>課外活動</h1>
-    </header>
-    <section>
-        <div class="form-box">
-            <form action="/activities" method="post">
-                <label for="question">你的問題:</label><br>
-                <input type="text" id="question" name="question" value="{{ question }}"><br><br>
-                <label for="answer">答案:</label><br>
-                <input type="text" id="answer" name="answer" readonly value="{{ answer }}"><br><br>
-                <input type="submit" value="送出">
-                <input type="button" value="回首頁" onclick="window.location.href='/'">
-            </form>
-        </div>
-    </section>
-</body>
-</html>
+    }
+</style>
