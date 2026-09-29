@@ -1,137 +1,163 @@
-<header>
-    <h1>課外活動</h1>
-    <p>在課堂之外，探索興趣、累積經驗，發現更好的自己</p>
+<title>課外活動｜我的學習歷程</title>
 
-    <a href="/" class="back-btn">← 回首頁</a>
-</header>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-<main class="container">
+    body {
+        font-family: "Noto Sans TC", Arial, sans-serif;
+        background: #f5f7fa;
+        color: #333;
+        line-height: 1.8;
+    }
 
-    <section class="intro">
-        <h2>我的課外活動</h2>
-        <p>
-            高中三年的生活不只有課業，我也積極參與不同的活動，
-            從團隊合作、競賽到志工服務，每一次經驗都讓我有所成長。
-        </p>
-    </section>
+    header {
+        background: linear-gradient(135deg, #2563eb, #4f46e5);
+        color: white;
+        text-align: center;
+        padding: 60px 20px;
+    }
 
-    <section class="activities">
+    header h1 {
+        font-size: 42px;
+        margin-bottom: 10px;
+    }
 
-        <!-- 活動一 -->
-        <article class="activity-card">
-            <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1000&q=80"
-                 alt="學生參與學習活動">
+    header p {
+        font-size: 18px;
+        opacity: 0.9;
+    }
 
-            <div class="activity-content">
-                <h3>📚 自主學習</h3>
-                <div class="date">高中三年</div>
+    .back-btn {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 10px 22px;
+        background: white;
+        color: #2563eb;
+        text-decoration: none;
+        border-radius: 25px;
+        transition: 0.3s;
+    }
 
-                <p>
-                    利用課餘時間探索自己有興趣的主題，透過網路課程、
-                    書籍與實際練習，培養獨立學習與解決問題的能力。
-                </p>
+    .back-btn:hover {
+        background: #e0e7ff;
+        transform: translateY(-2px);
+    }
 
-                <p>
-                    在自主學習的過程中，我學會規劃時間，也更加了解自己的興趣與未來方向。
-                </p>
+    .container {
+        max-width: 1100px;
+        margin: 50px auto;
+        padding: 0 20px;
+    }
 
-                <span class="tag">自主學習</span>
-                <span class="tag">時間管理</span>
-            </div>
-        </article>
+    .intro {
+        text-align: center;
+        margin-bottom: 40px;
+    }
 
+    .intro h2 {
+        font-size: 30px;
+        color: #1e3a8a;
+        margin-bottom: 10px;
+    }
 
-        <!-- 活動二 -->
-        <article class="activity-card">
-            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=80"
-                 alt="學生團隊合作">
+    .intro p {
+        color: #666;
+    }
 
-            <div class="activity-content">
-                <h3>💻 資訊與程式活動</h3>
-                <div class="date">高中期間</div>
+    .activities {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
 
-                <p>
-                    參與資訊相關活動，接觸網頁設計與程式開發，
-                    嘗試將自己的想法透過程式實際呈現出來。
-                </p>
+    .activity-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+        transition: 0.3s;
+    }
 
-                <p>
-                    從撰寫程式的過程中，我學習如何分析問題、尋找解決方法，
-                    也培養了耐心與邏輯思考能力。
-                </p>
+    .activity-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
 
-                <span class="tag">程式設計</span>
-                <span class="tag">網頁設計</span>
-            </div>
-        </article>
+    .activity-card img {
+        width: 100%;
+        height: 230px;
+        object-fit: cover;
+        display: block;
+    }
 
+    .activity-content {
+        padding: 25px;
+    }
 
-        <!-- 活動三 -->
-        <article class="activity-card">
-            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1000&q=80"
-                 alt="學生團隊討論">
+    .activity-content h3 {
+        color: #2563eb;
+        font-size: 23px;
+        margin-bottom: 8px;
+    }
 
-            <div class="activity-content">
-                <h3>🤝 社團與團隊活動</h3>
-                <div class="date">高中期間</div>
+    .date {
+        color: #777;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
 
-                <p>
-                    參與學校社團與團隊活動，和同學一起完成任務與活動規劃。
-                    在團隊中學習溝通、分工與互相合作。
-                </p>
+    .activity-content p {
+        color: #555;
+        margin-bottom: 12px;
+    }
 
-                <p>
-                    我了解到一個好的團隊不只是每個人做好自己的工作，
-                    更需要互相協調與支持。
-                </p>
+    .tag {
+        display: inline-block;
+        background: #dbeafe;
+        color: #1d4ed8;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        margin-top: 5px;
+    }
 
-                <span class="tag">團隊合作</span>
-                <span class="tag">溝通能力</span>
-            </div>
-        </article>
+    .summary {
+        background: linear-gradient(135deg, #eff6ff, #eef2ff);
+        margin-top: 50px;
+        padding: 35px;
+        border-radius: 16px;
+        text-align: center;
+    }
 
+    .summary h2 {
+        color: #1e3a8a;
+        margin-bottom: 15px;
+    }
 
-        <!-- 活動四 -->
-        <article class="activity-card">
-            <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1000&q=80"
-                 alt="志工服務活動">
+    footer {
+        margin-top: 60px;
+        padding: 25px;
+        text-align: center;
+        background: #1e293b;
+        color: white;
+    }
 
-            <div class="activity-content">
-                <h3>❤️ 志工服務</h3>
-                <div class="date">高中期間</div>
+    @media (max-width: 768px) {
+        header h1 {
+            font-size: 32px;
+        }
 
-                <p>
-                    利用課餘時間參與志工服務，協助活動進行與公共服務工作，
-                    從實際行動中學習關心他人。
-                </p>
+        .activities {
+            grid-template-columns: 1fr;
+        }
 
-                <p>
-                    志工經驗讓我體會到幫助別人不一定需要做很大的事情，
-                    從小地方開始也能帶來正面的影響。
-                </p>
+        .activity-card img {
+            height: 200px;
+        }
+    }
+</style>
 
-                <span class="tag">志工服務</span>
-                <span class="tag">責任感</span>
-            </div>
-        </article>
-
-    </section>
-
-
-    <section class="summary">
-        <h2>🌱 我的收穫</h2>
-
-        <p>
-            課外活動讓我的高中生活更加豐富。
-            我不只學到了課本以外的知識，也培養了溝通、
-            合作、時間管理與解決問題的能力。
-            這些經驗將成為我未來進入大學後繼續學習的重要基礎。
-        </p>
-    </section>
-
-</main>
-
-
-<footer>
-    <p>© 2026 我的個人網站｜高中生學習歷程</p>
-</footer>
