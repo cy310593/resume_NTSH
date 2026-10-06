@@ -103,6 +103,9 @@ def electives():
 def ai():
     return render_template('ai.html')
 
+@app.route("/pokemon")
+def pokemon():
+    return render_template("pokemon.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
