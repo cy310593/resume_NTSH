@@ -91,7 +91,6 @@ def ask():
     )
 
 
-
 #改成互動 3/17
 @app.route('/activities', methods=['GET', 'POST'])
 def activities():
