@@ -1,11 +1,16 @@
+
 from flask import Flask, request, render_template
+import requests
 
 app = Flask(__name__)
 
-# 建立中韓題庫
+# =========================
+# 一、中韓翻譯題庫
+# =========================
+
 zh_ko_dict = {
     "你好": "안녕하세요",
-    "안녕하세요" : "你好",
+    "안녕하세요": "你好",
     "謝謝": "감사합니다",
     "對不起": "죄송합니다",
     "早安": "좋은 아침",
@@ -17,7 +22,11 @@ zh_ko_dict = {
     "愛": "사랑"
 }
 
-# 建立中日題庫
+
+# =========================
+# 二、中日翻譯題庫
+# =========================
+
 zh_jp_dict = {
     "你好": "こんにちは",
     "謝謝": "ありがとう",
@@ -32,128 +41,204 @@ zh_jp_dict = {
 }
 
 
+# =========================
+# 三、首頁
+# =========================
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
+
+# =========================
+# 四、競賽頁面
+# =========================
+
 @app.route('/competition')
 def competition():
     return render_template('competition.html')
 
-# 使用 dict 作為中韓翻譯的題庫
-@app.route('/competition')
-def competition():
-    return render_template('competition.html')
 
-# 中韓、中日翻譯共用路由
+# =========================
+# 五、中韓、中日翻譯系統
+# =========================
+
 @app.route('/ask', methods=['GET', 'POST'])
 def ask():
 
+    question = ""
+    answer = ""
+    language = "ko"
+
     if request.method == 'POST':
 
-        # 讀取學生輸入的問題
         question = request.form.get('question', '').strip()
-
-        # 讀取選擇的語言
         language = request.form.get('language', 'ko')
 
-        # 根據語言選擇題庫
         if language == 'ko':
             dictionary = zh_ko_dict
             language_name = "韓文"
-            template_name = "ask.html"
 
         elif language == 'jp':
             dictionary = zh_jp_dict
             language_name = "日文"
-            template_name = "ask.html"
 
-        # 查詢答案
-        answer = dictionary.get(
-            question,
-            f"抱歉，我目前沒有這個詞的{language_name}對應。"
-        )
+        else:
+            dictionary = {}
+            language_name = "指定語言"
 
-        # 回傳答案
-        return render_template(
-            template_name,
-            question=question,
-            answer=answer,
-            language=language
-        )
+        if question:
+            answer = dictionary.get(
+                question,
+                f"抱歉，我目前沒有這個詞的{language_name}對應。"
+            )
 
-    # GET 時給空白欄位
     return render_template(
         'ask.html',
-        question="",
-        answer="",
-        language="ko"
+        question=question,
+        answer=answer,
+        language=language
     )
 
 
-#改成互動 3/17
+# =========================
+# 六、互動活動
+# =========================
+
 @app.route('/activities', methods=['GET', 'POST'])
 def activities():
-    if request.method == 'POST':
-        # 2. 讀取學生的問題
-        question = request.form.get('question', '').strip()
-        # 3. 查詢題庫的對應答案
-        answer1 = "抱歉，我目前沒有這個詞的韓文對應。"
-        # 4. 回傳答案給學生
-        return render_template('activities.html', question=question, answer=answer1)
-    # GET 時給空白欄位
-    return render_template('activities.html', question="", answer="")
 
-#改成互動 4/14
+    question = ""
+    answer = ""
+
+    if request.method == 'POST':
+
+        question = request.form.get('question', '').strip()
+
+        answer = "抱歉，我目前沒有這個詞的韓文對應。"
+
+    return render_template(
+        'activities.html',
+        question=question,
+        answer=answer
+    )
+
+
+# =========================
+# 七、股票查詢系統
+# =========================
+
 @app.route('/stock', methods=['GET', 'POST'])
 def stock():
+
+    question = ""
+    answer = ""
+
     if request.method == 'POST':
-        # 2. 讀取股票號碼
+
+        # 讀取股票代號
         question = request.form.get('question', '').strip()
-        # 3. 查詢股票號碼的對應股價
 
-        answer = data["data"][-1][6]
-   
-    
-    # API URL
-    url = f"https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&stockNo={stock_no}"
-    
-    # 發送請求
-    res = requests.get(url)
-    data = res.json()
-    
-    # 判斷是否成功
-    if data["stat"] == "OK":
-        answer = data["data"][0][6]
-        #print("收盤價：",data["data"][0][6])
-    else:
-        answer = "查無資料，請確認股票代號或日期"
+        if question:
 
-        # 4. 回傳答案給使用者
-        return render_template('stock.html', question=question, answer=answer)
-    # GET 時給空白欄位
-    return render_template('stock.html', question="", answer="")
+            # 證交所 API
+            url = (
+                "https://www.twse.com.tw/exchangeReport/"
+                f"STOCK_DAY?response=json&stockNo={question}"
+            )
 
+            try:
+
+                # 發送 API 請求
+                res = requests.get(url, timeout=10)
+                res.raise_for_status()
+
+                data = res.json()
+
+                # 判斷查詢是否成功
+                if data.get("stat") == "OK" and data.get("data"):
+
+                    # 取得最近一筆交易資料
+                    latest_data = data["data"][-1]
+
+                    # 收盤價
+                    answer = latest_data[6]
+
+                else:
+
+                    answer = "查無資料，請確認股票代號。"
+
+            except requests.RequestException:
+
+                answer = "股票資料查詢失敗，請稍後再試。"
+
+            except (ValueError, KeyError, IndexError):
+
+                answer = "股票資料格式異常，請稍後再試。"
+
+        else:
+
+            answer = "請輸入股票代號。"
+
+    return render_template(
+        'stock.html',
+        question=question,
+        answer=answer
+    )
+
+
+# =========================
+# 八、領導力
+# =========================
 
 @app.route('/leadership')
 def leadership():
     return render_template('leadership.html')
 
+
+# =========================
+# 九、社團
+# =========================
+
 @app.route('/club')
 def club():
     return render_template('club.html')
+
+
+# =========================
+# 十、選修課程
+# =========================
 
 @app.route('/electives')
 def electives():
     return render_template('electives.html')
 
+
+# =========================
+# 十一、AI 頁面
+# =========================
+
 @app.route('/ai')
 def ai():
     return render_template('ai.html')
 
-@app.route("/pokemon")
+
+# =========================
+# 十二、寶可夢
+# =========================
+
+@app.route('/pokemon')
 def pokemon():
-    return render_template("pokemon.html")
+    return render_template('pokemon.html')
+
+
+# =========================
+# 十三、啟動 Flask
+# =========================
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
