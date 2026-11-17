@@ -4,6 +4,7 @@ import requests
 
 app = Flask(__name__)
 
+
 # =========================
 # 一、中韓翻譯題庫
 # =========================
@@ -60,44 +61,57 @@ def competition():
 
 
 # =========================
-# 五、中韓、中日翻譯系統
+# 五、中韓、中日翻譯共用路由
 # =========================
 
 @app.route('/ask', methods=['GET', 'POST'])
 def ask():
 
-    question = ""
-    answer = ""
-    language = "ko"
-
     if request.method == 'POST':
 
+        # 讀取學生輸入的問題
         question = request.form.get('question', '').strip()
+
+        # 讀取選擇的語言
         language = request.form.get('language', 'ko')
 
+        # 根據語言選擇題庫
         if language == 'ko':
+
             dictionary = zh_ko_dict
             language_name = "韓文"
 
         elif language == 'jp':
+
             dictionary = zh_jp_dict
             language_name = "日文"
 
         else:
-            dictionary = {}
-            language_name = "指定語言"
 
-        if question:
-            answer = dictionary.get(
-                question,
-                f"抱歉，我目前沒有這個詞的{language_name}對應。"
-            )
+            dictionary = zh_ko_dict
+            language = 'ko'
+            language_name = "韓文"
 
+        # 查詢答案
+        answer = dictionary.get(
+            question,
+            f"抱歉，我目前沒有這個詞的{language_name}對應。"
+        )
+
+        # 回傳翻譯結果
+        return render_template(
+            'ask.html',
+            question=question,
+            answer=answer,
+            language=language
+        )
+
+    # GET 時給空白欄位
     return render_template(
         'ask.html',
-        question=question,
-        answer=answer,
-        language=language
+        question="",
+        answer="",
+        language="ko"
     )
 
 
@@ -136,12 +150,10 @@ def stock():
 
     if request.method == 'POST':
 
-        # 讀取股票代號
         question = request.form.get('question', '').strip()
 
         if question:
 
-            # 證交所 API
             url = (
                 "https://www.twse.com.tw/exchangeReport/"
                 f"STOCK_DAY?response=json&stockNo={question}"
@@ -149,19 +161,15 @@ def stock():
 
             try:
 
-                # 發送 API 請求
                 res = requests.get(url, timeout=10)
                 res.raise_for_status()
 
                 data = res.json()
 
-                # 判斷查詢是否成功
                 if data.get("stat") == "OK" and data.get("data"):
 
-                    # 取得最近一筆交易資料
                     latest_data = data["data"][-1]
 
-                    # 收盤價
                     answer = latest_data[6]
 
                 else:
